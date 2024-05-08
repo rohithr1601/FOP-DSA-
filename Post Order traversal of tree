@@ -1,0 +1,115 @@
+Iterative Postorder Traversal
+
+
+
+Given a binary tree, find the Postorder Traversal of it.
+
+For example, the postorder traversal of the following tree is:
+
+    1
+
+   /  \
+
+  10     39
+
+ /
+
+5
+
+
+
+5 10 39 1
+
+
+
+Input format:
+
+Accept the nodes of the binary tree in a single line.
+
+
+
+Output format:
+
+Print the postorder traversal of the tree in a single line.
+
+
+
+Example 1:
+
+
+
+
+
+Example 2:
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Node 
+{
+    int data;
+    Node left, right;
+    public Node(int val) 
+	{
+        data = val;
+        left = right = null;
+    }
+}
+public class Main 
+{
+    static void postorder(Node root) 
+	{
+        if (root == null)
+            return;
+        Stack<Node> st1 = new Stack<>();
+        Stack<Node> st2 = new Stack<>();
+        st1.push(root);
+        while (!st1.isEmpty()) 
+		{
+            Node curr = st1.pop();
+            st2.push(curr);
+            if (curr.left != null)
+                st1.push(curr.left);
+            if (curr.right != null)
+                st1.push(curr.right);
+        }
+        while (!st2.isEmpty()) 
+		{
+            System.out.print(st2.pop().data + " ");
+        }
+    }
+    public static void main(String[] args) 
+	{
+        Scanner sc = new Scanner(System.in);
+        String inp = sc.nextLine().trim();
+        String[] values = inp.split(" ");
+        Node root = tree(values);
+        postorder(root);
+    }
+    static Node tree(String[] values) 
+	{
+        if (values == null || values.length == 0 || values[0].equals("N"))
+            return null;
+        Queue<Node> queue = new LinkedList<>();
+        Node root = new Node(Integer.parseInt(values[0]));
+        queue.offer(root);
+        int i = 1;
+        while (!queue.isEmpty() && i < values.length) 
+		{
+            Node n = queue.poll();
+            if (!values[i].equals("N")) 
+			{
+                n.left = new Node(Integer.parseInt(values[i]));
+                queue.offer(n.left);
+            }
+            i++;
+            if (i < values.length && !values[i].equals("N")) 
+			{
+                n.right = new Node(Integer.parseInt(values[i]));
+                queue.offer(n.right);
+            }
+            i++;
+        }
+        return root;
+    }
+}
