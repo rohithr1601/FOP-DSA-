@@ -1,0 +1,106 @@
+Check if a Binary Tree is BST or not
+A binary search tree (BST) is a node based binary tree data structure which has the following properties. 
+
+The left subtree of a node contains only nodes with keys less than the node’s key.
+The right subtree of a node contains only nodes with keys greater than the node’s key.
+Both the left and right subtrees must also be binary search trees.
+Write a program to accept the nodes of a Binary tree. Construct a Binary tree in level order fashion and check if it is a Binary Search Tree or not.
+
+
+
+Note:
+
+You are to create a Binary Tree first from a parent array in level-order fashion. That is, elements from left in the array will be filled in the tree level wise starting from level 0.
+
+For example, if the array is: {1, 2, 3, 4, 5, 6}
+The structure of the tree is:
+                  1
+                 / \
+                2   3
+               / \ /
+              4  5 6
+
+
+Input format:
+
+The input consists of two lines.
+
+The first line contains an integer n, the number of nodes in the Binary tree.
+
+The second line contains n space-separated integers, the keys for the Binary tree.
+
+
+
+Output format:
+
+Print True if the given tree is a BST, else print False.
+
+
+
+Sample Input:
+
+5
+
+3 2 5 1 4
+
+Sample Output:
+
+False
+
+Explanation:
+
+The binary tree, after construction in level-order fashion looks like this:
+It is not a Binary Search Tree, so print False.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Node 
+{
+    int data;
+    Node left, right;
+    Node (int val)
+	{
+        data = val;
+        left = right = null;
+    }
+}
+class Main{
+    Node root=null;
+    Node insert(int[] a, Node root, int i, int n) 
+	{
+        if (i < n) 
+		{
+            Node temp = new Node(a[i]);
+            root = temp;
+            root.left = insert(a, root.left, 2 * i + 1, n);
+            root.right = insert(a, root.right, 2 * i + 2, n);
+        }
+        return root;
+    }
+    boolean isBSTornot(Node node, int min, int max) 
+	{
+        if (node == null)
+            return true;
+        if (node.data < min || node.data > max)
+            return false;
+        return (isBSTornot(node.left, min, node.data - 1) && isBSTornot(node.right, node.data + 1, max));
+    }
+    boolean isBST(Node node) 
+	{
+        return isBSTornot(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    public static void main(String args[]) {
+        Main t = new Main();
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int a[] = new int[n];
+        for (int i = 0; i < n; i++)
+            a[i] = sc.nextInt();
+        t.root = t.insert(a, t.root, 0, n);
+        if (t.isBST(t.root))
+            System.out.println("True");
+        else
+            System.out.println("False");
+    }
+}
