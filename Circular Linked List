@@ -1,0 +1,150 @@
+QUESTION 02
+bookmark_border
+Diana is a newbie in data structures. She has got a task to implement circular queue using linked list. She has started something. But, she is not able to figure out how to complete it. Can you please help her?
+
+The program has four options to insert an element, delete an element, display all the elements and exit the program respectively.
+
+Input Format:
+
+Get the choice from the user. The choice may be 1, 2, 3, 4.
+
+1) Insert
+
+2) Delete
+
+3) Display
+
+4) Exit
+
+Perform the operation based on the given choice. For wrong choice print "Invalid Input".
+
+If the queue is empty when you are trying to display the elements, then print "Queue is empty"
+
+If the queue is empty when you are trying to delete, then print "Queue is empty"
+
+Sample Input:
+
+1
+
+1
+
+1
+
+2
+
+1
+
+3
+
+2
+
+3
+
+4
+
+Sample Output:
+
+2 3
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Node 
+{
+    int data;
+    Node next;
+    public Node(int data) 
+	{
+        this.data = data;
+        this.next = null;
+    }
+}
+class CircularQueue 
+{
+    private Node rear;
+    private Node front;
+    public CircularQueue() 
+	{
+        this.rear = null;
+        this.front = null;
+    }
+    public void enqueue(int data) 
+	{
+        Node newNode = new Node(data);
+        if (front == null) 
+		{
+            front = newNode;
+        } 
+		else 
+		{
+            rear.next = newNode;
+        }
+        rear = newNode;
+        rear.next = front;
+    }
+    public void dequeue() 
+	{
+        if (isEmpty()) 
+		{
+            System.out.println("Queue is empty");
+            return;
+        }
+        if (front == rear) 
+		{
+            front = null;
+            rear = null;
+        } 
+		else 
+		{
+            front = front.next;
+            rear.next = front;
+        }
+    }
+    public void display() 
+	{
+        if (isEmpty()) 
+		{
+            System.out.println("Queue is empty");
+            return;
+        }
+        Node temp = front;
+        do 
+		{
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        } 
+		while (temp != front);
+        System.out.println();
+    }
+    public boolean isEmpty() 
+	{
+        return front == null;
+    }
+}
+public class Main 
+{
+    public static void main(String[] args) 
+	{
+        Scanner sc = new Scanner(System.in);
+        CircularQueue queue = new CircularQueue();
+        while (true) 
+		{
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    int data = sc.nextInt();
+                    queue.enqueue(data);
+                    break;
+                case 2:
+                    queue.dequeue();
+                    break;
+                case 3:
+                    queue.display();
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("Invalid Input");
+            }
+        }
+    }
+}
