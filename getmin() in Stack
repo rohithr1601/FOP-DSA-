@@ -1,0 +1,117 @@
+QUESTION 01
+bookmark_border
+Design a data-structure SpecialStack that supports all the stack operation operation getMin() which should return minimum element from the SpecialStack. Your task is to complete all the functions, using stack data-Structure.
+
+
+
+Sample Input
+
+1
+
+5
+
+18 19 29 15 16 
+
+ 
+
+Sample Output
+
+15
+
+ 
+
+Expected Time Complexity: O(N) for getMin, O(1) for remaining all 4 functions.
+
+Expected Auxiliary Space: O(1) for all the 5 functions.
+
+
+
+Constraints
+
+1 ≤ N ≤ 104
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main 
+{
+    int[] stack;
+    int[] minStack;
+    int top;
+    int minTop;
+    int maxSize;
+    Main(int size) 
+	{
+        stack = new int[size];
+        minStack = new int[size];
+        top = -1;
+        minTop = -1;
+        maxSize = size;
+    }
+    void push(int x) 
+	{
+        if (top >= maxSize - 1) 
+		{
+            System.out.println("Stack Overflow");
+            return;
+        }
+        stack[++top] = x;
+        if (minTop == -1 || x <= minStack[minTop]) 
+		{
+            minStack[++minTop] = x;
+        }
+    }
+    int pop() 
+	{
+        if (top == -1) 
+		{
+            System.out.println("Stack Underflow");
+            return -1;
+        }
+        int popped = stack[top--];
+        if (popped == minStack[minTop]) 
+		{
+            minTop--;
+        }
+        return popped;
+    }
+
+    int peek() 
+	{
+        if (top == -1) 
+		{
+            System.out.println("Stack is empty");
+            return -1;
+        }
+        return stack[top];
+    }
+    boolean isEmpty() 
+	{
+        return top == -1;
+    }
+    int getMin() 
+	{
+        if (minTop == -1) 
+		{
+            System.out.println("Stack is empty");
+            return -1;
+        }
+        return minStack[minTop];
+    }
+    public static void main(String[] args) 
+	{
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+        while (T-- > 0) 
+		{
+            int N = sc.nextInt();
+            Main s = new Main(N);
+            for (int i = 0; i < N; i++) 
+			{
+                int element = sc.nextInt();
+                s.push(element);
+            }
+            System.out.println(s.getMin());
+        }
+    }
+}
