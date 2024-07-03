@@ -1,0 +1,81 @@
+import java.util.*;
+class Queue
+{
+    int size;
+    int arr[];
+    int front, rear;
+    Queue(int s)
+    {
+        size = s;
+        arr = new int[size];
+        front=rear=-1;
+    }
+    void Enqueue(int ele)
+    {
+        if(rear==size-1)
+        {
+            System.out.println("Queue is Full");
+        }
+        else if(front==-1 && rear==-1)
+        {
+            front++;
+            rear++;
+            arr[rear]=ele;
+        }
+        else{
+            arr[++rear]=ele;
+        }
+    }
+    int Dequeue()
+    {
+        if(front==-1 && rear==-1)
+        {
+            System.out.println("Dequeue is not posiible as Queue is Empty");
+            return 0;
+        }
+        else
+        {
+            int ele = arr[front];
+            front++;
+            return ele;
+        }
+    }
+    void Display()
+    {
+        for(int i=front;i<=rear;i++)
+        {
+            System.out.println(arr[i]);
+        }
+    }
+    int peek()
+    {
+        return arr[front];
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int size = sc.nextInt();
+	    Queue q = new Queue(size);
+        int ele;
+        while (true) 
+        {
+            ele = sc.nextInt();
+            if (ele != -1) 
+            {
+                q.Enqueue(ele);
+            }
+            else
+            {
+                break;
+            }
+        }
+        System.out.println(q.Dequeue());
+        System.out.println("Elements in the Queue are");
+        q.Display();
+        System.out.println("Peek Element is ");
+        System.out.println(q.peek());
+	}
+}
+
