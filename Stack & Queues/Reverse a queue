@@ -1,0 +1,153 @@
+Reverse a queue
+Write a program to reverse the order of a queue. If the queue doesn't have a value, then print "Queue is empty".
+
+
+
+Format:
+
+Input:
+
+The input consists of a list of integers, a negative value indicates the end of a queue.
+
+Output:
+
+Print the reversed queue.
+
+
+
+Example:
+
+Input:
+
+1
+
+2
+
+3
+
+4
+
+-1
+
+Output:
+
+Before reversing:
+
+1 2 3 4
+
+After reversing:
+
+4 3 2 1
+
+
+Case 1
+Case 2
+Input (stdin)
+1
+2
+3
+4
+-1
+
+Output (stdout)
+Before reversing:
+1 2 3 4
+After reversing:
+4 3 2 1
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Queue
+{
+    int size;
+    int arr[];
+    int front, rear;
+    Queue(int s)
+    {
+        size = s;
+        arr = new int[size];
+        front=rear=-1;
+    }
+    void Enqueue(int ele)
+    {
+        if(rear==size-1)
+        {
+            System.out.println("Queue is Full");
+        }
+        else if(front==-1 && rear==-1)
+        {
+            front++;
+            rear++;
+            arr[rear]=ele;
+        }
+        else{
+            arr[++rear]=ele;
+        }
+    }
+    int Dequeue()
+    {
+        if(front==-1 && rear==-1)
+        {
+            System.out.println("Dequeue is not possible as Queue is Empty");
+            return 0;
+        }
+        else
+        {
+            int ele = arr[front];
+            front++;
+            return ele;
+        }
+    }
+    void Display()
+    {
+        for(int i=front;i<=rear;i++)
+        {
+            System.out.print(arr[i] + " ");
+        }
+    }
+  	void Reverse()
+    {
+        for(int i=rear;i>=front;i--)
+        {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    int peek()
+    {
+        return arr[front];
+    }
+}
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int size = 100;
+	    Queue q = new Queue(size);
+        int ele;
+        while (true) 
+        {
+            ele = sc.nextInt();
+            if (ele >= 0) 
+            {
+                q.Enqueue(ele);
+            }
+            else
+            {
+                break;
+            }
+        }
+      if(q.front==-1 && q.rear==-1)
+      {
+        System.out.println("Queue is empty");
+      }
+      else
+      {
+        System.out.println("Before reversing:");
+        q.Display();
+        System.out.println();
+        System.out.println("After reversing:");
+      	q.Reverse();
+       }
+	}
+}
