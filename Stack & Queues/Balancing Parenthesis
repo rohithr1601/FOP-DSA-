@@ -1,0 +1,78 @@
+Balanced parenthesis
+Write a program to check whether the given parenthesis is balanced or not.
+
+
+
+Format:
+
+Input:
+
+The input consists of parenthesis.
+
+Output:
+
+The output consists of a result "Balanced" or "Not Balanced".
+
+
+
+Example:
+
+Input:
+
+{()}[]
+
+Output:
+
+Balanced
+
+Hint: {}, [] and () are used.
+
+
+Case 1
+Case 2
+Input (stdin)
+{()}[]
+
+Output (stdout)
+Balanced
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.Scanner;
+import java.util.Stack;
+public class Main
+{
+    boolean balanced(String s)
+    {
+        Stack<Character> st = new Stack<>();
+        for(char ch : s.toCharArray())
+        {
+            if(ch == '(' || ch == '[' || ch == '{')
+            {
+                st.push(ch);
+            }
+            else if(ch==')' || ch == ']' || ch == '}')
+            {
+                if(st.isEmpty() || !isMatching(st.pop(), ch))
+                {
+                    return false;
+                }
+            }
+        }
+        return st.isEmpty();
+    }
+     boolean isMatching(char op, char cl) 
+     {
+        return (op == '(' && cl == ')') || (op == '[' && cl == ']') || (op == '{' && cl == '}');
+    }
+	public static void main(String[] args) {
+	    Main main = new Main();
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (main.balanced(input)) {
+            System.out.println("Balanced");
+        } else {
+            System.out.println("Not Balanced");
+        }
+	}
+}
