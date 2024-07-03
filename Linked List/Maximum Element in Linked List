@@ -1,0 +1,102 @@
+Find maximum element in linked list
+Write a program to find the maximum number in a list.
+
+
+
+Example:
+
+Input:
+
+1
+
+7
+
+2
+
+5
+
+-1
+
+Output:
+
+7
+
+
+Case 1
+Case 2
+Input (stdin)
+1
+5
+2
+4
+7
+3
+-1
+
+Output (stdout)
+7
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.Scanner;
+class node 
+{
+  int data;
+  node next;
+  node(int val)
+  {
+    data = val;
+    next = null;
+  }
+}
+class Main
+{
+  node head;
+    void insertinend(int ele)
+    {
+        node newnode = new node(ele);
+        if(head==null)
+        {
+            head = newnode;
+        }
+        else
+        {
+            node t= head;
+            while(t.next!=null)
+            {
+                t = t.next;
+            }
+            t.next=newnode;
+        }
+    }
+  void max()
+    {
+        int max;
+        max = 0;
+        node t = head;
+        while(t!=null)
+        {
+            if(t.data>max)
+            {
+                max = t.data;
+            }
+            t = t.next;
+        }
+        System.out.println(max);
+    }
+  public static void main(String args[])
+  {
+    Main l1 = new Main();
+    Scanner sc = new Scanner(System.in);
+    while(true)
+    {
+		int n = sc.nextInt();
+      	if(n<0)
+        {
+          break;
+        }
+    l1.insertinend(n);
+    }
+    l1.max();
+  }
+}
