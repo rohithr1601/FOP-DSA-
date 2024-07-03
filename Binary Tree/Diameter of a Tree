@@ -1,0 +1,172 @@
+Diameter of a Binary Tree
+
+
+Write a program to find the diameter of a binary tree.
+
+The diameter of a tree (sometimes called the width) is the number of nodes on the longest path between two end nodes.
+
+The diagram below shows two trees each with diameter nine, the leaves that form the ends of the longest path are shaded (note that there is more than one path in each tree of length nine, but no path longer than nine nodes). 
+
+
+
+Input Format :
+
+The tree is given as space separated integers indicating nodes of tree.
+
+Every (2*i)th element of the integers denotes left child of node i.
+
+Every (2*i +1)th element of the integers denotes right child of node i.
+
+Stop the tree on encountering -1.
+
+
+
+Constraints :
+
+﻿
+2
+<
+=
+𝑛
+𝑢
+𝑚
+𝑏
+𝑒
+𝑟
+𝑜
+𝑓
+𝑛
+𝑜
+𝑑
+𝑒
+𝑠
+<
+=
+30000
+2<=numberofnodes<=30000﻿
+
+﻿
+1
+<
+=
+𝑛
+𝑜
+𝑑
+𝑒
+𝑣
+𝑎
+𝑙
+𝑢
+𝑒
+<
+=
+1
+0
+5
+1<=nodevalue<=10 
+5
+ ﻿
+
+
+
+Output Format :
+
+Print the diameter of the tree.
+
+
+
+Example 1:
+
+Input:
+
+1 2 3 4 5 -1
+
+Output:
+
+4
+
+Explanation:
+
+The tree is as shown below, for this tree the diameter is 4.
+
+
+
+
+Case 1
+Case 2
+Input (stdin)
+1 2 3 -1
+
+Output (stdout)
+3
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Node 
+{
+    int data;
+    Node left;
+    Node right;
+    Node(int a) 
+    {
+        data = a;
+        left = null;
+        right = null;
+    }
+}
+class Main 
+{
+    static Node head;
+    static void insert(Scanner sc) 
+    {
+        Queue<Node> queue = new LinkedList<>();
+        int x = sc.nextInt();
+        if (x == -1) 
+        {
+            return;
+        }
+        head = new Node(x);
+        queue.add(head);
+        while (!queue.isEmpty()) 
+        {
+            Node temp = queue.poll();
+            if (!sc.hasNextInt()) break;
+            x = sc.nextInt();
+            if (x == -1) break;
+            temp.left = new Node(x);
+            queue.add(temp.left);
+            if (!sc.hasNextInt()) break;
+            int y = sc.nextInt();
+            if (y == -1) break;
+            temp.right = new Node(y);
+            queue.add(temp.right);
+        }
+    }
+    static int height(Node node) 
+    {
+        if (node == null) 
+        {
+            return 0;
+        }
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+    static int diameter(Node tree) 
+    {
+        if (tree == null) 
+        {
+            return 0;
+        }
+        int lheight = height(tree.left);
+        int rheight = height(tree.right);
+        int ldiameter = diameter(tree.left);
+        int rdiameter = diameter(tree.right);
+        return Math.max(lheight + rheight + 1, Math.max(ldiameter, rdiameter));
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        insert(sc);
+        System.out.println(diameter(head));
+    }
+}
