@@ -1,0 +1,128 @@
+Delete an element in linked list
+Write a program to delete an element at the beginning of the linked list. Get the values continuously from the user until the user enters a negative value.
+
+
+
+Format:
+
+Input:
+
+The input should be numbers (until user enters a negative value).
+
+Output:
+
+The output should be the list of numbers in separate lines.
+
+
+
+Example:
+
+Input:
+
+1
+
+2
+
+3
+
+4
+
+-1
+
+Output:
+
+2
+
+3
+
+4
+
+
+Case 1
+Case 2
+Case 3
+Input (stdin)
+1
+2
+3
+4
+-10
+
+Output (stdout)
+2
+3
+4
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.Scanner;
+class node 
+{
+  int data;
+  node next;
+  node(int val)
+  {
+    data = val;
+    next = null;
+  }
+}
+class Main
+{
+  node head;
+    void insertinend(int ele)
+    {
+        node newnode = new node(ele);
+        if(head==null)
+        {
+            head = newnode;
+        }
+        else
+        {
+            node t= head;
+            while(t.next!=null)
+            {
+                t = t.next;
+            }
+            t.next=newnode;
+        }
+    }
+  void deleteatbeg()
+    {
+        if(head==null)
+        {
+            System.out.println("LL is empty");
+        }
+        else
+        {
+            head = head.next;
+        }
+    }
+  public static void main(String args[])
+  {
+    Main l1 = new Main();
+    Scanner sc = new Scanner(System.in);
+    while(true)
+    {
+		int n = sc.nextInt();
+      	if(n<0)
+        {
+          break;
+        }
+    l1.insertinend(n);
+    }
+    l1.deleteatbeg();
+    l1.display();
+  }
+  void display()
+        {
+            node temp=head;
+            if(head==null)
+            {
+                System.out.println("Linked list is empty");
+            }
+            while(temp != null) {
+            System.out.println(temp.data + " ");
+            temp = temp.next;
+            }
+        }
+}
