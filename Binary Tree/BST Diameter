@@ -1,0 +1,115 @@
+Binary Search Tree - Diameter
+Write a program to find the diameter of a binary search tree.
+
+
+
+Example:
+
+Input:
+
+1
+
+2
+
+3
+
+4
+
+5
+
+-1
+
+Output:
+
+Diameter of the given binary tree is 5
+
+
+Case 1
+Case 2
+Input (stdin)
+1
+2
+3
+4
+5
+-1
+
+Output (stdout)
+Diameter of the given binary tree is 5
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Node
+{
+	int data;
+    Node left, right;
+    public Node (int data)
+    {
+        this.data = data;
+        left= right =null;
+    }
+}
+public class Main
+{
+    static Node root;
+    public static Node insert(int data, Node root)
+    {
+        if(root==null)
+        {
+            Node newNode = new Node(data);
+            return newNode;
+        }
+        if(root.data >= data)
+        {
+            root.left = insert(data, root.left);
+        }
+        else
+        {
+            root.right = insert(data, root.right);
+        }
+        return root;
+    }
+    public static int add(Node root)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        return root.data + add(root.left) + add(root.right);
+    }
+    static int height(Node node) 
+    {
+        if (node == null) 
+        {
+            return 0;
+        }
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+    static int diameter(Node tree) 
+    {
+        if (tree == null) 
+        {
+            return 0;
+        }
+        int lheight = height(tree.left);
+        int rheight = height(tree.right);
+        int ldiameter = diameter(tree.left);
+        int rdiameter = diameter(tree.right);
+        return Math.max(lheight + rheight + 1, Math.max(ldiameter, rdiameter));
+    }
+	public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+	   while (sc.hasNextInt()) 
+	   {
+            int data = sc.nextInt();
+            if (data == -1) {
+                break;
+            }
+            root = insert(data, root);
+        }
+       System.out.println("Diameter of the given binary tree is " + diameter(root));
+    }
+}
+
