@@ -1,0 +1,95 @@
+Binary search tree - Sum
+Write a program to sum up all the elements in a tree.
+
+
+
+Example:
+
+Input:
+
+6
+
+3
+
+1
+
+4
+
+2
+
+-1
+
+Output:
+
+Sum of all nodes are 16
+
+
+Case 1
+Case 2
+Input (stdin)
+6
+3
+1
+4
+2
+-1
+
+Output (stdout)
+Sum of all nodes are 16
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Node
+{
+	int data;
+    Node left, right;
+    public Node (int data)
+    {
+        this.data = data;
+        left= right =null;
+    }
+}
+public class Main
+{
+    static Node root;
+    public static Node insert(int data, Node root)
+    {
+        if(root==null)
+        {
+            Node newNode = new Node(data);
+            return newNode;
+        }
+        if(root.data >= data)
+        {
+            root.left = insert(data, root.left);
+        }
+        else
+        {
+            root.right = insert(data, root.right);
+        }
+        return root;
+    }
+    public static int add(Node root)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        return root.data + add(root.left) + add(root.right);
+    }
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int data;
+	    do
+	    {
+	        data = sc.nextInt();
+	        if(data > 0)
+	        {
+	            root= insert(data,root);
+	        }
+	    }
+	    while (data > 0);
+	    System.out.print("Sum of all nodes are " + add(root));
+	}
+}
