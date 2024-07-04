@@ -1,0 +1,129 @@
+Lowest Common Ancestor
+Write a program to find a common ancestor of a given two numbers in the tree. Let T be the root of a tree. The lowest common ancestor between two nodes n1 and n2 is defined as the lowest node in T. Which has both n1 and n2 as descendants (where we allow a node to be a descendant of itself). The LCA of n1 and n2 in T is the shared ancestor of n1 and n2, which is located farthest from the root. Computation of the Lowest common ancestor is useful. For instance, as part of a procedure for determining the distance between the pairs of a node in a tree. The distance from n1 to n2 can be computed as a distance from a root to n1. Plus, the distance from a root to n2. Later, subtract two times the distance from a root to their lowest common ancestor.
+
+
+
+Format:
+
+Input:
+
+6
+
+3
+
+1
+
+4
+
+2
+
+-1
+
+3 6
+
+Output:
+
+6
+
+
+
+
+Case 1
+Case 2
+Input (stdin)
+5 3 7 2 4 6 8 -1
+2 4
+
+Output (stdout)
+3
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class  Node 
+{
+    int data;
+    Node left, right;
+    public Node(int data)
+    {
+        this.data = data;
+        left = right = null;
+    }
+}
+public class Main
+{
+    static Node root;
+    public static Node create(int n)
+    {
+        return new Node(n);
+    }
+    public static Node lca(Node root, int n1, int n2)
+    {
+        if(root == null)
+        {
+            return null;
+        }
+        if(root.data > n1 && root.data > n2)
+        {
+            return lca(root.left, n1, n2);
+        }
+        else if(root.data <n1 && root.data < n2)
+        {
+            return lca(root.right, n1, n2);
+        }
+        return root;
+    }
+    public static void insert(Node newNode, Node current)
+    {
+        if(newNode.data < current.data)
+        {
+            if(current.left != null)
+            {
+                insert(newNode, current.left);
+            }
+            else
+            {
+                current.left = newNode;
+            }
+        }
+        else if(newNode.data > current.data)
+        {
+            if(current.right != null)
+            {
+                insert(newNode, current.right);
+            }
+            else
+            {
+                current.right = newNode;
+            }
+        }
+    }
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int n = sc.nextInt();
+	    while(n!=-1)
+	    {
+	        Node newNode = create(n);
+	        if(root==null)
+	        {
+	            root = newNode;
+	        }
+	        else
+	        {
+	            insert(newNode, root);
+	        }
+	        n = sc.nextInt();
+	    }
+	    int n1 = sc.nextInt();
+	    int n2 = sc.nextInt();
+	    Node lcaNode = lca(root, n1, n2);
+	    if(lcaNode != null)
+	    {
+	        System.out.println(lcaNode.data);
+	    }
+	    else
+	    {
+	        System.out.println("LCA not Found");
+	    }
+	}
+}
