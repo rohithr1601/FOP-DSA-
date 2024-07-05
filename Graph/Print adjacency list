@@ -1,0 +1,173 @@
+Print adjacency list
+Given the number of edges 'E' and vertices 'V' of a bidirectional graph. Your task is to build a graph through the adjacency list and print the adjacency list for each vertex.
+
+
+
+Format:
+
+Input:
+
+The first line of input is T denoting the number of test cases. Then the first line of each test case contains two positive integers V and E. Where 'V' is the number of vertexes and 'E' is the number of edges in a graph. Next, the 'E' line contains two positive numbers showing that there is an edge between this two vertex.
+
+Output:
+
+For each vertex, print their connected nodes in the order you are pushing them inside the list. See the given example.
+
+
+
+Constraints:
+
+1 <= T <= 200
+
+1 <= V <= 103
+
+1 <= E <= V*(V-1)
+
+
+
+Example:
+
+Input:
+
+2
+
+5 7
+
+0 1
+
+0 4
+
+1 2
+
+1 3
+
+1 4
+
+2 3
+
+3 4
+
+3 3
+
+0 1
+
+1 2
+
+2 0
+
+Output:
+
+0-> 1-> 4
+
+1-> 0-> 2-> 3-> 4
+
+2-> 1-> 3
+
+3-> 1-> 2-> 4
+
+4-> 0-> 1-> 3
+
+0-> 1-> 2
+
+1-> 0-> 2
+
+2-> 1-> 0
+
+Explanation:
+
+Testcase 1: Given graph has 5 nodes and 7 edges. After creating adjacency list of given graph, we have created a list:
+
+0-> 1-> 4
+
+1-> 0-> 2-> 3-> 4
+
+2-> 1-> 3
+
+3-> 1-> 2-> 4
+
+4-> 0-> 1-> 3
+
+
+Case 1
+Case 2
+Input (stdin)
+2
+5 7
+0 1
+0 4
+1 2
+1 3
+1 4
+2 3
+3 4
+3 3
+0 1
+1 2
+2 0
+
+Output (stdout)
+0-> 1-> 4
+1-> 0-> 2-> 3-> 4
+2-> 1-> 3
+3-> 1-> 2-> 4
+4-> 0-> 1-> 3
+0-> 1-> 2
+1-> 0-> 2
+2-> 1-> 0
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main 
+{
+    private ArrayList<ArrayList<Integer>> adjList;
+    private int V;
+    public Main(int V) 
+    {
+        this.V = V;
+        adjList = new ArrayList<>(V);
+        for (int i = 0; i < V; i++) {
+            adjList.add(new ArrayList<>());
+        }
+    }
+    public void addEdge(int s, int d) 
+    {
+        adjList.get(s).add(d);
+        adjList.get(d).add(s);
+    }
+    public void printGraph() 
+    {
+        for (int i = 0; i < V; i++) 
+        {
+            System.out.print(i + "->");
+            for (int j = 0; j < adjList.get(i).size(); j++) 
+            {
+                System.out.print(" " + adjList.get(i).get(j));
+                if (j < adjList.get(i).size() - 1) 
+                {
+                    System.out.print("->");
+                }
+            }
+            System.out.println();
+        }
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+
+        for (int t = 0; t < T; t++) 
+        {
+            int V = sc.nextInt(); 
+            int E = sc.nextInt(); 
+            Main graph = new Main(V);
+            for (int i = 0; i < E; i++) 
+            {
+                int s = sc.nextInt();
+                int d = sc.nextInt();
+                graph.addEdge(s, d);
+            }
+            graph.printGraph();
+        }
+    }
+}
