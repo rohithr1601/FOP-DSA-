@@ -1,0 +1,139 @@
+Graph-Adjacency Matrix Representation
+Write a program to implement a graph using an adjacency Matrix.
+
+
+
+Example:
+
+Input:
+
+4
+
+4
+
+yes
+
+1 2 6
+
+2 3 7
+
+3 4 8
+
+2 4 9
+
+Output:
+
+Please enter the number of nodes in the graph
+
+Please enter the number of edges in the graph
+
+Is the graph directed
+
+Adjacency Matrix Representation:
+
+0 0 0 0
+
+0 0 0 0
+
+0 0 0 0
+
+0 0 0 0
+
+Enter the start node, end node and weight of edge no 1
+
+Enter the start node, end node and weight of edge no 2
+
+Enter the start node, end node and weight of edge no 3
+
+Enter the start node, end node and weight of edge no 4
+
+Adjacency Matrix Representation:
+
+0 6 0 0
+
+0 0 7 9
+
+0 0 0 8
+
+0 0 0 0
+
+
+Case 1
+Input (stdin)
+4
+4
+yes
+1 2 6
+2 3 7
+3 4 8
+2 4 9
+
+Output (stdout)
+Please enter the number of nodes in the graph
+Please enter the number of edges in the graph
+Is the graph directed
+Adjacency Matrix Representation:
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+Enter the start node, end node and weight of edge no 1
+Enter the start node, end node and weight of edge no 2
+Enter the start node, end node and weight of edge no 3
+Enter the start node, end node and weight of edge no 4
+Adjacency Matrix Representation:
+0 6 0 0
+0 0 7 9
+0 0 0 8
+0 0 0 0
+
+++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Main
+{
+  public static void printAdjMat(int[][] arr, int rows)
+  {
+	System.out.println("Adjacency Matrix Representation: ");
+    for(int i=1;i<= rows; i++)
+    {
+      for(int j=1; j<= rows; j++)
+      {
+		System.out.print(arr[i][j] + " ");
+      }
+      System.out.println();
+    }
+  }
+  public static void main(String args[])
+  {
+    Scanner sc = new Scanner(System.in);
+    int[][] arr;
+    int rows, edges, snode, enode, weight;
+    String directed;
+    System.out.println("Please enter the number of nodes in the graph");
+    rows = sc.nextInt();
+    System.out.println("Please enter the number of edges in the graph");
+    edges = sc.nextInt();
+    System.out.println("Is the graph directed");
+    directed = sc.next();
+    arr = new int[rows + 1][rows + 1];
+    printAdjMat(arr, rows);
+    for(int i=1;i<=edges;i++)
+    {
+		System.out.println("Enter the start node, end node and weight of edge no " + i );
+      	snode = sc.nextInt();
+      	enode = sc.nextInt();
+      weight = sc.nextInt();
+      if(directed.equals("yes"))
+         {
+           arr[snode][enode] = weight;
+         }
+         else
+         {
+			arr[snode][enode] = weight;
+           arr[enode][snode] = weight;
+         }
+    }
+    printAdjMat(arr, rows);
+  }
+}
