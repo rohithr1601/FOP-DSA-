@@ -1,0 +1,68 @@
+Given an array that represents elements of an arithmetic progression. One element is missing in the progression, find the missing number. The first and last element will not be the missing number. Write a program to implement the program with O(log n) time complexity.
+
+Input Format
+
+The first line of input consists of size of an array.
+
+The second line of input consists of elements of an array separated by space.
+
+Output Format
+
+The output consists of the missing number in the series.
+
+Constraints
+
+1 <= N <= 1000
+
+1 <= k <= 50000
+
+Refer the sample output for formatting
+
+Sample Input:
+
+5
+
+1 5 7 9 11
+
+Sample Output:
+
+3
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Main 
+{
+    public static void main(String[] args) 
+	{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) 
+		{
+            a[i] = sc.nextInt();
+        }
+        int m = miss(a, n);
+        System.out.println(m);
+    }
+    static int miss(int[] a, int n) 
+	{
+        int low = 0, high = n - 1;
+        int d = (a[n-1] - a[0]) / n;
+        while (low <= high) 
+		{
+            int mid = low + (high - low) / 2;
+            if (a[mid] == a[0] + mid * d) 
+			{
+                low = mid + 1;
+            } 
+			else 
+			{
+                high = mid - 1;
+            }
+        }
+        return a[0] + low * d;
+    }
+}
