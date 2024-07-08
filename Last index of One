@@ -1,0 +1,102 @@
+Last index of One
+Given a string S consisting of only '0's and '1's. Print the last index of '1' present in it.
+
+
+
+Format:
+
+﻿Input:
+
+The first line of the input contains the number of test cases T, And these T lines follow each containing a stream of characters.
+
+Output:
+
+Corresponding to every test case, print the output of the last index of 1. If 1 is not present, print "-1" (without quotes).
+
+
+
+Constraints:
+
+1 <= T <= 110
+
+1 <= |S| <= 106
+
+
+
+Example:
+
+Input:
+
+2
+
+00001
+
+0
+
+Output:
+
+4
+
+-1
+
+Explanation:
+
+Testcase 1: The last index of 1 in the given string is 4.
+
+Testcase 2: Since 1 is not present, so the output is -1.
+
+
+Case 1
+Case 2
+Input (stdin)
+2
+00001
+0
+
+Output (stdout)
+4
+-1
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Main
+{
+  public static void main(String args[])
+  {
+    Scanner sc = new Scanner(System.in);
+    int t = sc.nextInt();
+    for(int i=0;i<t;i++)
+    {
+      String s = sc.next();
+      System.out.println(s.lastIndexOf('1'));
+    }
+  }
+}
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Main
+{
+  static int lastIndex(String s)
+  {
+    for(int i=s.length() -1 ;i>=0;i--)
+    {
+      if(s.charAt(i)=='1')
+         return i;
+    }
+    return -1;
+  }
+  public static void main(String args[])
+  {
+    Scanner sc = new Scanner(System.in);
+    int t = sc.nextInt();
+    for(int i=0;i<t;i++)
+    {
+      String s = sc.next();
+      int l = lastIndex(s);
+      System.out.println(l);
+    }
+  }
+}
