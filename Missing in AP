@@ -66,3 +66,36 @@ class Main
         return a[0] + low * d;
     }
 }
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Main 
+{
+    public static void main(String[] args) 
+	{
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++) 
+		{
+            a[i] = sc.nextInt();
+        }
+        int m = miss(a, n);
+        System.out.println(m);
+    }
+    static int miss(int[] a, int n) 
+	{
+        int d = (a[n-1] - a[0]) / n;
+       for(int i=0;i<n;i++)
+	   {
+		   int temp = a[0] + (i * d);
+		   if(temp!=a[i])
+		   {
+			   return temp;
+		   }
+	   }
+        return -1;
+    }
+}
