@@ -1,0 +1,90 @@
+Move all zeroes to end
+Write a program to move all zeroes to the end of a given integer.
+
+
+
+Format:
+
+Input:
+
+The first line of input contains a number of test cases T. For each test case, the first line of input contains a single integer of 0's and 1's.
+
+Output:
+
+The output contains a single line integer value.
+
+
+
+Constraints:
+
+1 ≤ T ≤ 10
+
+1 ≤ N ≤ 109
+
+
+
+Example:
+
+Input:
+
+2
+
+1010101
+
+0000111
+
+Output:
+
+1111000
+
+1110000
+
+
+Case 1
+Case 2
+Input (stdin)
+2
+1010101
+1000111
+
+Output (stdout)
+1111000
+1111000
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+class Main
+{
+  public static void main(String args[])
+  {
+    Scanner sc = new Scanner (System.in);
+    int t = sc.nextInt();
+    for(int i=0;i<t;i++)
+    {
+      int n = sc.nextInt();
+      int count =0;
+      int sum =0;
+      int r=0;
+      while(n!=0)
+      {
+        r = n%10;
+        if(r==0)
+        {
+			count++;
+        }
+        else
+        {
+          sum = (sum*10)+r;
+        }
+        n = n/10;
+      }
+    	System.out.print(sum);
+      for(int j=0;j<count;j++)
+      {
+        System.out.print("0");
+      }
+      System.out.println();
+    }
+  }
+}
