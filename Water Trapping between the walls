@@ -1,0 +1,50 @@
+import java.util.*;
+public class Main
+{
+  public static void main (String[]args)
+  {
+	Scanner sc = new Scanner (System.in);
+	int n = sc.nextInt ();
+	int[] a = new int[n];
+	for (int i = 0; i < n; i++)
+	  {
+		a[i] = sc.nextInt ();
+	  }
+	int lm = 0;
+	int[] L = new int[n];
+	for (int i = 0; i < n; i++)
+	  {
+		if (lm < a[i])
+		  {
+			lm = a[i];
+		  }
+		L[i] = lm;
+	  }
+	int rm = 0;
+	int[] R = new int[n];
+	for (int i = n - 1; i >= 0; i--)
+	  {
+		if (rm < a[i])
+		  {
+			rm = a[i];
+		  }
+		R[i] = rm;
+	  }
+	int w = 0;
+	for (int i = 0; i < n; i++)
+	  {
+		int min;
+		if (L[i] < R[i])
+		  {
+			min = L[i];
+		  }
+		else
+		  {
+			min = R[i];
+		  }
+		int lw = min - a[i];
+		w = w + lw;
+	  }
+	System.out.println (w);
+  }
+}
