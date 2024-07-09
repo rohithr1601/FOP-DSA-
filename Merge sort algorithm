@@ -1,0 +1,121 @@
+Merge sort algorithm
+Write a program to implement a Merge sort algorithm for sorting the elements of an array.
+
+
+
+Format:
+
+Input:
+
+The first line corresponds to the size of an array.
+
+The second line corresponds to the elements in an array.
+
+Output Format:
+
+Sort an array using the Merge sort algorithm and print sorted array.
+
+
+
+Example:
+
+Input:
+
+6
+
+11 15 26 38 9 10 
+
+Output:
+
+9 10 11 15 26 38
+
+
+Case 1
+Case 2
+Input (stdin)
+3
+12
+15
+14
+
+Output (stdout)
+12 14 15
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+import java.io.*;
+class Main
+{
+  static void merge(int a[], int l, int m, int r)
+  {
+    int n1 = m-l+1;
+    int n2 = r-m;
+    int L[] = new int[n1];
+    int R[] = new int[n2];
+    for(int i=0;i<n1;i++)
+      L[i] = a[l+i];
+    for(int j=0;j<n2;j++)
+      R[j] = a[m+1+j];
+    int i=0, j=0;
+    int k=l;
+    while(i<n1 && j<n2)
+    {
+      if(L[i] <= R[j])
+      {
+        a[k] = L[i];
+        i++;
+      }
+      else
+      {
+        a[k] = R[j];
+        j++;
+      }
+      k++;
+    }
+    while(i<n1)
+    {
+		a[k] = L[i];
+      	i++;
+      	k++;
+    }
+    while(j<n2)
+    {
+      a[k] = R[j];
+      j++;
+      k++;
+    }
+  }
+  static void sort(int a[], int l, int r)
+  {
+    if(l<r)
+    {
+	int m = l +(r-l)/2;
+      sort(a, l, m);
+      sort(a, m+1, r);
+      
+      merge(a, l, m, r);
+    }
+  }
+  static void printArray(int a[])
+  {
+    int n = a.length;
+    for(int i=0;i<n;i++)
+    {
+      System.out.print(a[i] + " ");
+    }
+    System.out.println();
+  }
+  public static void main(String args[])
+  {
+    Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    int[] a = new int[n];
+    for(int i=0;i<n;i++)
+    {
+      a[i] = sc.nextInt();
+    }
+    sort(a, 0, a.length-1);
+    printArray(a);
+  }
+}
