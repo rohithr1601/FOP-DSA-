@@ -1,0 +1,43 @@
+Minimum number of coins
+Given a value N, if we want to make a change for Rs N and we have an infinite supply of each of the denominations in Indian currency. That is, we have an infinite supply of {1, 2, 5, 10, 20, 50, 100, 500, 1000} valued coins/notes. What is the minimum number of coins and/or notes needed to make the change?
+
+
+
+Example:
+
+Input:
+
+1230
+
+Output:
+
+1000 100 100 20 10  
+
+
+Case 1
+Case 2
+Input (stdin)
+1230
+
+Output (stdout)
+1000  100  100  20  10
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int n = sc.nextInt();
+	    int a[] = {1,2,5,10,20,50,100,500,1000};
+	    for(int i = a.length-1;i>=0;i--)
+	    {
+	        while(n>=a[i])
+	        {
+	            System.out.print(a[i] + "  ");
+	            n -= a[i];
+	        }
+	    }
+	}
+}
