@@ -1,0 +1,80 @@
+Minimum sum of product of two arrays
+Find the minimum sum of products of two arrays of the same size. Given that 'k' modifications are allowed in the first array. In each modification, the array elements from the first array can either be increased or decreased by 2.
+
+
+
+Example:
+
+Input:
+
+5
+
+1 2 3 4 5
+
+1 2 3 4 5
+
+2
+
+Output:
+
+35
+
+
+Case 1
+Case 2
+Input (stdin)
+5
+1 2 3 4 5
+1 2 3 4 5
+2
+
+Output (stdout)
+35
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    Scanner sc = new Scanner(System.in);
+	    int n = sc.nextInt();
+	    int[] a = new int[n];
+	    int[] b = new int[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        a[i] = sc.nextInt();
+	    }
+	    for(int i=0;i<n;i++)
+	    {
+	        b[i] = sc.nextInt();
+	    }
+	    int k = sc.nextInt();
+	    int[] c = new int[n];
+	    int sum = 0;
+	    int[] d = new int[n];
+	    int max = 0;
+	    for(int i=0;i<n;i++)
+	    {
+	        c[i] = a[i] * b[i];
+	        sum += c[i];
+	        if(a[i] >= 0)
+	        {
+	            a[i] = a[i] - (2*k);
+	        }
+	        else
+	        {
+	            a[i] = a[i] + (2*k);
+	        }
+	        d[i] = a[i] * b[i];
+	        d[i] = c[i] - d[i];
+	        if(d[i] > max)
+	        {
+	            max = d[i];
+	        }
+	    }
+	    int res = sum - max;
+	    System.out.println(res);
+	}
+}
