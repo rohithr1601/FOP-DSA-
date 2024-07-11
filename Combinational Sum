@@ -34,9 +34,18 @@ public class Main
         int t = sc.nextInt();
         List<List<Integer>> res = new ArrayList<>();
         backtrack(a, t, 0, new ArrayList<>(), res);
-        System.out.println(res);
+        for (List<Integer> i : res) 
+        {
+            for (int num : i) 
+            {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
     }
 }
+
+
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
