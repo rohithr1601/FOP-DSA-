@@ -1,0 +1,119 @@
+Longest Bitonic subsequence
+Given an array of positive integers. The task is to print the maximum length of the Bitonic subsequence. A subsequence of an array is called Bitonic if it first increases, then decreases.
+
+
+
+Format:
+
+Input:
+
+First-line contains T test cases. Every first line of each test case consists of N, denoting the number of elements in an array. The second line of every test case consists of elements in an array.
+
+Output:
+
+For each test case, in a new line. Print the length of the longest bitonic subsequence.
+
+
+
+Constraints:
+
+1 <= T <= 100
+
+1 <= N <= 100
+
+1 <= Ai <= 200
+
+
+
+Example:
+
+Input:
+
+2
+
+5
+
+1 2 5 3 2
+
+8
+
+1 11 2 10 4 5 2 1
+
+Output:
+
+5
+
+6
+
+
+Case 1
+Case 2
+Input (stdin)
+2
+5
+1 2 5 3 2
+8
+1 11 2 10 4 5 2 1
+
+Output (stdout)
+5
+6
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main 
+{
+    public static int lbs(int[] a, int n) 
+    {
+        int[] lis = new int[n];
+        int[] lds = new int[n];
+        Arrays.fill(lis, 1);
+        Arrays.fill(lds, 1);
+        for (int i = 1; i < n; i++) 
+        {
+            for (int j = 0; j < i; j++) 
+            {
+                if (a[i] > a[j] && lis[i] < lis[j] + 1) 
+                {
+                    lis[i] = lis[j] + 1;
+                }
+            }
+        }
+        for (int i = n - 2; i >= 0; i--) 
+        {
+            for (int j = n - 1; j > i; j--) 
+            {
+                if (a[i] > a[j] && lds[i] < lds[j] + 1) 
+                {
+                    lds[i] = lds[j] + 1;
+                }
+            }
+        }
+        int max = lis[0] + lds[0] - 1;
+        for (int i = 1; i < n; i++) 
+        {
+            if (lis[i] + lds[i] - 1 > max) 
+            {
+                max = lis[i] + lds[i] - 1;
+            }
+        }
+        return max;
+    }
+
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) 
+        {
+            int n = sc.nextInt();
+            int[] a = new int[n];
+            for (int i = 0; i < n; i++) 
+            {
+                a[i] = sc.nextInt();
+            }
+            System.out.println(lbs(a, n));
+        }
+    }
+}
