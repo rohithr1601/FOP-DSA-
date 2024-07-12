@@ -1,0 +1,74 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    Scanner sc = new Scanner(System.in);
+	    int n = sc.nextInt();
+	    int k = sc.nextInt();
+	    Integer[] a = new Integer[n];
+	    int c =0;
+	    for(int i=0;i<n;i++)
+	    {
+	        a[i] = sc.nextInt();
+	    }
+	    while(n>=k)
+	    {
+	        Arrays.sort(a, Collections.reverseOrder());
+	        for(int i=0;i<k;i++)
+	        {
+	            a[i] = a[i] - 1;
+	        }
+	        for(int i=0;i<n;i++)
+	        {
+	            if(a[i] == 0)
+	            {
+	                n--;
+	            }
+	        }
+	        c++;
+	    }
+	    System.out.println(c);
+	}
+}
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main
+{
+    public static int ActiveTime(int n, int k, Integer[] ballons)
+    {
+        Arrays.sort(ballons, Collections.reverseOrder());
+        int min = 0;
+        int grp = n;
+        while(grp >= k)
+        {
+            for(int i=0;i<k;i++)
+            {
+                ballons[i] -= 1;
+                if(ballons[i] ==0)
+                {
+                    grp--;
+                }
+            }
+            min++;
+            Arrays.sort(ballons, Collections.reverseOrder());
+        }
+        return min;
+    }
+	public static void main(String[] args) 
+	{
+	    Scanner sc = new Scanner(System.in);
+	    int n = sc.nextInt();
+	    int k = sc.nextInt();
+	    Integer[] a = new Integer[n];
+	    for(int i=0;i<n;i++)
+	    {
+	        a[i] = sc.nextInt();
+	    }
+      int res = ActiveTime(n, k, a);
+	    System.out.println(res);
+	}
+}
