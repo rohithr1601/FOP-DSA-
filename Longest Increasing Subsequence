@@ -1,0 +1,88 @@
+Longest Increasing Subsequence
+Given an integer array 'A'. Find the length of its Longest Increasing Subsequence of a sub-array from the given integer array. The elements are sorted in monotonic increasing order. You need to create a function that takes two inputs - integer 'n' and an integer array containing 'n' integers. To return the length of its LIS.
+
+
+
+Format:
+
+Input:
+
+The integer input is 'n'. And Integer array 'A' input, contains 'n' integers.
+
+Output:
+
+Return the length of its LIS.
+
+
+
+Constraint:
+
+1 <= input1 <= 1000
+
+
+
+Example:
+
+Input:
+
+3
+
+1, 3, 2
+
+Output:
+
+2
+
+
+Case 1
+Case 2
+Input (stdin)
+3
+1 3 2
+
+Output (stdout)
+2
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    int n = sc.nextInt();
+	    int[] a = new int[n];
+	    for(int i =0;i<n;i++)
+	    {
+	        a[i] = sc.nextInt();
+	    }
+	    int res = LIS(a);
+	    System.out.println(res);
+	}
+	public static int LIS(int[] a)
+	{
+	    if(a.length == 0)
+	    {
+	        return 0;
+	    }
+	    int n = a.length;
+	    int[] dp = new int[n];
+	    Arrays.fill(dp, 1);
+	    for(int i=1;i<n;i++)
+	    {
+	        for(int j=0;j<i;j++)
+	        {
+	            if(a[i] > a[j])
+	            {
+	                dp[i] = Math.max(dp[i], dp[j] + 1);
+	            }
+	        }
+	    }
+	    int max = 0;
+	    for(int len : dp)
+	    {
+	        max = Math.max(max, len);
+	    }
+	    return max;
+	}
+}
