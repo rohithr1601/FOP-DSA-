@@ -1,0 +1,100 @@
+Longest Common Subsequence
+Given two strings, 'x' and 'y'. Find the length of their Longest Common subsequence (LCS). The two strings contains only lowercase letters. Write a program that takes in two strings as inputs and returns the length of their LCS.
+
+
+
+Format:
+
+input:
+
+The input is a string of 'x' and 'y'.
+
+Output:
+
+Return the length of the LCS of 'x' and 'y'.
+
+
+
+Example 1:
+
+input:
+
+aba
+
+ababa
+
+Output:
+
+3
+
+Explanation:
+
+The length of the "Longest Common Subsequence" is 3 that is "aba".
+
+
+
+Example 2:
+
+input:
+
+aggtab
+
+gxtxayb
+
+Output:
+
+4
+
+Explanation: Length of Longest common subsequence is 4 that is "gtab"
+
+
+Case 1
+Case 2
+Input (stdin)
+aba
+ababa
+
+Output (stdout)
+3
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+import java.util.*;
+public class Main
+{
+    static int lcs(String s1, String s2)
+    {
+        int n = s1.length();
+        int m = s2.length();
+        int dp[][] = new int[n+1][m+1];
+        for(int i=0;i<=n;i++)
+        {
+            dp[i][0] = 0;
+        }
+        for(int i=0;i<=m;i++)
+        {
+            dp[0][i] = 0;
+        }
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                if(s1.charAt(i-1)==s2.charAt(j-1))
+                {
+                    dp[i][j] = 1+dp[i-1][j-1];
+                }
+                else
+                {
+                    dp[i][j] = 0 + Math.max(dp[i-1][j], dp[i][j-1]);
+                }
+            }
+        }
+        return dp[n][m];
+    }
+	public static void main(String[] args) {
+	    Scanner sc = new Scanner(System.in);
+	    String s1 = sc.nextLine();
+	    String s2 = sc.nextLine();
+	    System.out.println(lcs(s1,s2));
+	}
+}
